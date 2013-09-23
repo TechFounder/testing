@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130923142939) do
+ActiveRecord::Schema.define(version: 20130923201556) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -33,8 +33,15 @@ ActiveRecord::Schema.define(version: 20130923142939) do
     t.datetime "updated_at"
   end
 
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+  add_index "admins", ["email"], name: "index_admins_on_email", unique: true
+  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "company_profiles", force: true do |t|
     t.text     "description"
@@ -61,10 +68,12 @@ ActiveRecord::Schema.define(version: 20130923142939) do
     t.string   "unconfirmed_email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
-  add_index "company_users", ["email"], name: "index_company_users_on_email", unique: true, using: :btree
-  add_index "company_users", ["reset_password_token"], name: "index_company_users_on_reset_password_token", unique: true, using: :btree
+  add_index "company_users", ["company_id"], name: "index_company_users_on_company_id"
+  add_index "company_users", ["email"], name: "index_company_users_on_email", unique: true
+  add_index "company_users", ["reset_password_token"], name: "index_company_users_on_reset_password_token", unique: true
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -86,8 +95,8 @@ ActiveRecord::Schema.define(version: 20130923142939) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "vehicles", force: true do |t|
     t.string   "make"
@@ -96,6 +105,9 @@ ActiveRecord::Schema.define(version: 20130923142939) do
     t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
+
+  add_index "vehicles", ["company_id"], name: "index_vehicles_on_company_id"
 
 end

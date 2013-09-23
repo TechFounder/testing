@@ -1,7 +1,8 @@
 <h1>Admin Login Page</h1>
 
-<% if user_signed_in? %>
+<% if admin_signed_in? %>
 	Show Admin Profile
+	<%= link_to "Manage companies", "companies#index" %> 
 <% else %>
 	<div>
 			<h1><%= link_to "Admin Sign Up", new_admin_registration_path %></h1>

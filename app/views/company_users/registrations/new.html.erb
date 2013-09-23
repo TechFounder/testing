@@ -5,6 +5,7 @@
 
   <div class="form-inputs large-3 colunms">
     <%= f.input :name, :required => true, :autofocus => true %>
+    <%= f.input :company_id, :collection => Company.find(:all), :label_method => :name,:value_method => :id,:label => "Company" ,:include_blank => false %>
     <%= f.input :email, :required => true %>
     <%= f.input :password, :required => true %>
     <%= f.input :password_confirmation, :required => true %>
