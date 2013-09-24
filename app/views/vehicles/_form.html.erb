@@ -3,9 +3,10 @@
 
   <div class="inputs">
     <%= f.input :make %>
-    <%= f.input :v_type %>
+    <%= f.input :v_type, label: "Type" %>
     <%= f.input :year %>
     <%= f.input :color %>
+    <%= f.hidden_field :company_id, value: current_company_user.company_id %>
   </div>
 
   <div class="actions">
