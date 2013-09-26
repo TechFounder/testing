@@ -7,11 +7,20 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
+
+  def after_sign_in_path_for(resource)
+    case resource
+    when User then '/user_page'
+    when Admin then '/admin'
+    when CompanyUser then '/company'
+    end    
+  end
+
   
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :company_id) }
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :company_id, :email, :password, :password_confirmation) }
   end
 
   private

@@ -1,12 +1,16 @@
 <%= simple_form_for(@vehicle) do |f| %>
   <%= f.error_notification %>
-
   <div class="inputs">
     <%= f.input :make %>
     <%= f.input :v_type, label: "Type" %>
     <%= f.input :year %>
     <%= f.input :color %>
-    <%= f.hidden_field :company_id, value: current_company_user.company_id %>
+    <% if company_user_signed_in? %>
+      <%= f.hidden_field :company_id, value: current_company_user.company_id %>
+    <% end %>
+    <% if admin_signed_in? %>
+      <%= f.input :company_id, :collection => Company.find(:all), :label_method => :name,:value_method => :id,:label => "Company" ,:include_blank => false %>
+    <% end %>   
   </div>
 
   <div class="actions">

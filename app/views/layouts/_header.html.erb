@@ -2,15 +2,46 @@
 	<section class="top-bar-section">
 	<ul class="left">
     <li><%= link_to "Home", root_path %></li>
-		<li><%= link_to "Admin Login Page", admin_path %></li>
-		<li><%= link_to "Company Login Page", company_path %></li>
+    	<% if admin_signed_in? %>
+    	  <li><%= link_to "Admin home", admin_path %></li>
+    	<% elsif company_user_signed_in? %>
+    	  <li><%= link_to "Company home", '/company' %></li>
+    	<% elsif user_signed_in? %>
+    	  <li><%= link_to "Customer home", '/user_page' %></li>
+    	<% else %>
+		  <li><%= link_to "Admins", admin_path %></li>
+		  <li><%= link_to "Companies", '/company' %></li>
+		  <li><%= link_to "Customers", '/user_page' %></li>
+		<% end %>
 	</ul>
 	<ul class="top-bar-section right">
-		<% if user_signed_in? %>
+
+
+
+
+		<% if admin_signed_in? %>
+			<li><%= link_to "Edit Profile", edit_admin_registration_path %></li>
+			<li><%= link_to "Logout", destroy_admin_session_path, method: :delete %></li>
+		<% elsif company_user_signed_in? %>
+			<li><%= link_to "Edit Profile", edit_company_user_registration_path %></li>
+			<li><%= link_to "Logout", destroy_company_user_session_path, method: :delete %></li>
+		<% elsif user_signed_in? %>
 			<li><%= link_to "Edit Profile", edit_user_registration_path %></li>
 			<li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
 		<% else %>
-			<li><%= link_to "Login", new_user_session_path %></li>
+		  <% if params[:action] == 'company_user' %>
+            <li><%= link_to "Company Login", new_company_user_session_path %></li>
+          <% elsif params[:action] == 'user_page' %>
+            <li><%= link_to "Customer Login", new_user_session_path %></li>
+          <% elsif params[:action] == 'admin' %>
+            <li><%= link_to "Admin Login", new_admin_session_path %></li>
+          <% else %>
+          <% end %>
+
+
+		  
 		<% end %>
-	</ul>
+
+
+
 </nav>
