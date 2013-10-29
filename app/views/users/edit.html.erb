@@ -1,0 +1,9 @@
+<%= simple_nested_form_for @user do |f| %>
+		<%= f.error_notification %>
+			<%= f.fields_for :addresses do |builder| %>
+				<%= render 'addresses/address', f: builder %>
+			<% end %>
+			<%= f.input :current_password %>
+			<%= f.link_to_add "Add an address", :addresses %>
+			<%= f.button :submit %>
+	<% end %>

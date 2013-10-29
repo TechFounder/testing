@@ -2,10 +2,10 @@
 
 <% if user_signed_in? %>
 	<h3>My Account</h3>
-	<h4><%= @current_user.name %></h4>
-	<h4><%= @current_user.email %></h4>
+	<h4><%= current_user.name %></h4>
+	<h4><%= current_user.email %></h4>
 
-	<h4><%= @current_user.addresses.each do |address| %>
+	<h4><% current_user.addresses.each do |address| %>
 				<%= address.kind %><br>
 				<%= address.street %><br>
 				<%= address.city %><br>
@@ -15,19 +15,12 @@
 			<% end %>
 	</h4>
 
-	
-	<%= simple_nested_form_for @user, url: registration_path(@user) do |f| %>
-		<%= f.error_notification %>
-			<%= f.fields_for :addresses do |builder| %>
-				<%= render 'addresses/address', f: builder %>
-			<% end %>
-			<%= f.input :current_password %>
-			<%= f.link_to_add "Add an address", :addresses %>
-			<%= f.button :submit %>
-	<% end %>
+
 
 <p><%= link_to "Change your username or password", edit_user_registration_path(@user) %></p>
 <p><%= link_to "Manage Transactions", "transactions#index" %></p>
+<p><%= link_to "Add an address", edit_user_path(@user) %></p>
+
 
 <% else %>
 	<div>
