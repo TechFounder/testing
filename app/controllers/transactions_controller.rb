@@ -23,6 +23,7 @@ class TransactionsController < ApplicationController
   def new
     @transaction = Transaction.new
     @transaction.locatables.build
+    @addresses = Address.joins(:locatables).where(locatables: { owner_type: "User", owner_id: current_user.id })
   end
 
   def add_vehicle

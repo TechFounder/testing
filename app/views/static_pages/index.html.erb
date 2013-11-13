@@ -9,13 +9,13 @@
 
 	<br><br>
 	<h4>Addresses	<%= link_to "(Change/Add an address)", edit_user_path(current_user) %></h4>
-	<% current_user.locatables.each do |locatable| %>
-		<%= locatable.kind %> Pick up Address<br>
-		<%= locatable.address.street %><br>
-		<%= locatable.address.city %><br>
-		<%= locatable.address.state %><br>
-		<%= locatable.address.zip %><br>
-		<%= locatable.address.country %><br><br>
+	<% current_user.addresses.each do |address| %>
+	 	<%= address.locatables.where(:owner_type => 'User').last.kind %> Pick up Address<br>
+	 	<%= address.street %><br>
+	 	<%= address.city %><br>
+	 	<%= address.state %><br>
+	 	<%= address.zip %><br>
+	 	<%= address.country %><br><br>
 	<% end %>
 
 <br>

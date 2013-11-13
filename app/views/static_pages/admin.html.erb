@@ -2,6 +2,7 @@
 
 <% if admin_signed_in? %>
 	<h3>Show Admin Profile for <%= current_admin.name %></h3>
+	<%= link_to "Manage Users", "users#path" %><br><br>
 	<%= link_to "Manage Company Users", "company_users#index" %><br><br>
 	<%= link_to "Manage Companies", "company_profiles#index" %><br><br>
 	<%= link_to "Manage Vehicles", "vehicles#index" %>

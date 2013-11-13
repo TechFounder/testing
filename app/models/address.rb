@@ -3,6 +3,9 @@ class Address < ActiveRecord::Base
 	has_many :owners, :through => :locatables
 	has_many :transactions, :through => :locatables
 
+	def kind
+		self.locatables.where(:owner_type => "User").last.kind
+	end	
 
 	geocoded_by :full_address
 	after_validation :geocode, :if => :full_address_changed?

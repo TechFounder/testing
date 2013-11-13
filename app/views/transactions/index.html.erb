@@ -18,8 +18,8 @@
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <td><%= transaction.pickup.locatables.kind %></td>
-        <td><%= transaction.dropoff.locatables.kind %></td>
+        <td><%= transaction.pickup.locatables.where(:owner_type => 'User').last.kind %></td>
+        <td><%= transaction.dropoff.locatables.where(:owner_type => 'User').last.kind %></td>
         <td><%= transaction.pickup_date %></td>
         <td><%= transaction.pickup_time %></td>
         <td><%= transaction.dropoff_date %></td>

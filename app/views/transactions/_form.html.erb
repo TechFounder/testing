@@ -3,11 +3,11 @@
 
   <div class="inputs">
     <%= f.fields_for :locatables do |l| %>
-      <%= l.input :address_id, :collection => Address.all, :label_method => :kind, :value_method => :id, :label => "Pickup", :include_blank => false %>
+      <%= l.input :address_id, :collection => @addresses, :label_method => :kind, :value_method => :id, :label => "Pickup", :include_blank => false %>
       <%= l.hidden_field :pickup, value: 'true' %>
     <% end %>
     <%= f.fields_for :locatables do |l| %>
-      <%= l.input :address_id, :collection => Address.all, :label_method => :kind, :value_method => :id, :label => "Dropoff", :include_blank => false %>
+      <%= l.input :address_id, :collection => @addresses, :label_method => :kind, :value_method => :id, :label => "Dropoff", :include_blank => false %>
       <%= l.hidden_field :pickup, value: 'false' %>
     <% end %>
     <%= f.input :pickup_date %>

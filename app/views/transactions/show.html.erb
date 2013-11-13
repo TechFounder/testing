@@ -1,11 +1,11 @@
 <p>
   <strong>Pickup Address:</strong>
-  <%= @transaction.pickup.kind %>
+  <%= @transaction.pickup.locatables.where(:owner_type => 'User').last.kind %>
 </p>
 
 <p>
   <strong>Dropoff Address:</strong>
-  <%= @transaction.dropoff.kind %>
+  <%= @transaction.dropoff.locatables.where(:owner_type => 'User').last.kind %>
 </p>
 
 <p>
