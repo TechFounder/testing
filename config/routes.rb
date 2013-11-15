@@ -1,5 +1,6 @@
 Testing::Application.routes.draw do
-  resources :transactions
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+   resources :transactions
   get "add_vehicle/:id",
          :controller => "transactions",
          :action => "add_vehicle"
@@ -12,6 +13,7 @@ Testing::Application.routes.draw do
 
   devise_for :users, :controllers => {:sessions => "sessions", :registrations => "registrations"}
   devise_for :admins, :controllers => {:sessions => "sessions", :registrations => "registrations"}
+  
   devise_for :company_users, :controllers => {:sessions => "sessions", :registrations => "registrations"}
   
   resources :users, only: [:show, :edit, :update]

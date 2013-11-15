@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20131030152909) do
     t.integer  "owner_id"
     t.string   "owner_type"
     t.integer  "address_id"
+    t.boolean  "pickup"
     t.string   "kind"
     t.datetime "created_at"
     t.datetime "updated_at"
