@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131030152909) do
+ActiveRecord::Schema.define(version: 20131115172343) do
 
   create_table "addresses", force: true do |t|
     t.string   "street"
@@ -96,6 +96,19 @@ ActiveRecord::Schema.define(version: 20131030152909) do
 
   add_index "locatables", ["address_id"], name: "index_locatables_on_address_id", using: :btree
   add_index "locatables", ["owner_id", "owner_type"], name: "index_locatables_on_owner_id_and_owner_type", using: :btree
+
+  create_table "rails_admin_histories", force: true do |t|
+    t.text     "message"
+    t.string   "username"
+    t.integer  "item"
+    t.string   "table"
+    t.integer  "month",      limit: 2
+    t.integer  "year",       limit: 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], name: "index_rails_admin_histories", using: :btree
 
   create_table "transactions", force: true do |t|
     t.string   "pickup_address"
